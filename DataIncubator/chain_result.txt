@@ -1,0 +1,15 @@
+100000000 iterations, N = 8
+Sample Mean:  2.8324786200
+Sample Std Dev:  0.6118289393
+
+Exact, N = 8
+numpy mean is  2.83253968254
+numpy std dev is  0.611831671669
+
+100000000 iterations, N = 16
+Sample Mean:  5.0664686600
+Sample Std Dev:  0.8540950442
+
+100000000 iterations, N = 32
+Sample Mean:  9.3750925700
+Sample Std Dev:  1.2191889143
