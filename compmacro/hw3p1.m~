@@ -1,0 +1,16 @@
+clear all
+clc
+n=30;
+a=0.27;
+b=0.994;
+k_star=(a*b)^(1/(1-a));
+k(1)=0.1*k_star;
+
+for i = 1:n
+    c=(1-(a*b))k(1)^a
+    k(i+1)=a*b*(k(i)^a);
+    c(i)=(1-(a*b))k(1)^a
+end
+
+plot(k)
+title(sprintf('

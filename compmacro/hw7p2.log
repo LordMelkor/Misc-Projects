@@ -1,0 +1,55 @@
+ 
+STEADY-STATE RESULTS:
+ 
+y 		 1.56148
+c 		 1.301
+k 		 5.20958
+z 		 0
+ 
+MODEL SUMMARY
+ 
+  Number of variables:         4
+  Number of stochastic shocks: 1
+  Number of state variables:   2
+  Number of jumpers:           2
+  Number of static variables:  1
+
+
+MATRIX OF COVARIANCE OF EXOGENOUS SHOCKS
+
+Variables    e         
+e            1.000000
+ 
+POLICY AND TRANSITION FUNCTIONS
+                                       y               c               k               z
+Constant                    1.561481        1.301002        5.209578               0
+k(-1)                       0.080928        0.110444        0.920484               0
+z(-1)                       1.405333        0.515802        0.889531        0.900000
+e                           0.010462        0.003840        0.006622        0.006700
+
+
+MOMENTS OF SIMULATED VARIABLES
+
+VARIABLE      MEAN            STD. DEV.       VARIANCE        SKEWNESS        KURTOSIS        
+y                 1.550035        0.021764        0.000474       -0.228533       -0.365383
+c                 1.292297        0.012671        0.000161       -0.281924       -0.592917
+k                 5.153845        0.073608        0.005418       -0.336415       -0.691312
+z                -0.004439        0.011829        0.000140       -0.220429       -0.219810
+
+
+CORRELATION OF SIMULATED VARIABLES
+
+VARIABLE    y       c       k       z       
+y           1.0000  0.9342  0.7501  0.9694
+c           0.9342  1.0000  0.9367  0.8181
+k           0.7501  0.9367  1.0000  0.5649
+z           0.9694  0.8181  0.5649  1.0000
+
+
+AUTOCORRELATION OF SIMULATED VARIABLES
+
+VARIABLE    1       2       3       4       5       
+y           0.8875  0.7873  0.6768  0.5913  0.5141
+c           0.9542  0.9036  0.8412  0.7814  0.7199
+k           0.9875  0.9615  0.9229  0.8751  0.8207
+z           0.8399  0.7042  0.5592  0.4555  0.3672

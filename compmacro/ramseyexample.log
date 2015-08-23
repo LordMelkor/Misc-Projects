@@ -1,0 +1,77 @@
+{Warning: Some of the parameters have no value (theta, a) when using steady. If these parameters are not
+initialized in a steadystate file, Dynare may not be able to solve the model...} 
+> In <a href="matlab: opentoline('/Users/krishanuar/Library/Application Support/MATLAB/Dynare/4.2.5/matlab/test_for_deep_parameters_calibration.m',46,1)">test_for_deep_parameters_calibration at 46</a>
+  In <a href="matlab: opentoline('/Users/krishanuar/Library/Application Support/MATLAB/Dynare/4.2.5/matlab/steady.m',33,1)">steady at 33</a>
+  In <a href="matlab: opentoline('/Users/krishanuar/Documents/MATLAB/ramseyexample.m',127,1)">ramseyexample at 127</a>
+  In <a href="matlab: opentoline('/Users/krishanuar/Library/Application Support/MATLAB/Dynare/4.2.5/matlab/dynare.m',120,1)">dynare at 120</a>
+ 
+STEADY-STATE RESULTS:
+ 
+y 		 0.609242
+i 		 0.15956
+c 		 0.449682
+k 		 0.15956
+z 		 0
+{Warning: Some of the parameters have no value (theta, a) when using stoch_simul. If these parameters are
+not initialized in a steadystate file, Dynare may not be able to solve the model...} 
+> In <a href="matlab: opentoline('/Users/krishanuar/Library/Application Support/MATLAB/Dynare/4.2.5/matlab/test_for_deep_parameters_calibration.m',46,1)">test_for_deep_parameters_calibration at 46</a>
+  In <a href="matlab: opentoline('/Users/krishanuar/Library/Application Support/MATLAB/Dynare/4.2.5/matlab/stoch_simul.m',22,1)">stoch_simul at 22</a>
+  In <a href="matlab: opentoline('/Users/krishanuar/Documents/MATLAB/ramseyexample.m',134,1)">ramseyexample at 134</a>
+  In <a href="matlab: opentoline('/Users/krishanuar/Library/Application Support/MATLAB/Dynare/4.2.5/matlab/dynare.m',120,1)">dynare at 120</a>
+ 
+MODEL SUMMARY
+ 
+  Number of variables:         5
+  Number of stochastic shocks: 1
+  Number of state variables:   2
+  Number of jumpers:           2
+  Number of static variables:  2
+
+
+MATRIX OF COVARIANCE OF EXOGENOUS SHOCKS
+
+Variables    e         
+e            1.000000
+ 
+POLICY AND TRANSITION FUNCTIONS
+                                       z               c               i               y
+Constant                           0        0.449639        0.159604        0.609242
+(correction)                       0       -0.000043        0.000043               0
+k(-1)                              0        0.488254        0.542674        1.030928
+z(-1)                       0.940000        0.454081        0.118607        0.572687
+e                           0.006700        0.003237        0.000845        0.004082
+k(-1),k(-1)                        0       -1.441853       -0.916429       -2.358282
+z(-1),k(-1)                        0        0.523682        0.445391        0.969072
+z(-1),z(-1)                        0        0.226474        0.042690        0.269163
+e,e                                0        0.000012        0.000002        0.000014
+k(-1),e                            0        0.003733        0.003175        0.006907
+z(-1),e                            0        0.003228        0.000609        0.003837
+
+
+THEORETICAL MOMENTS
+
+VARIABLE    MEAN       STD. DEV.  VARIANCE   
+z              0.0000     0.0196     0.0004
+c              0.4498     0.0119     0.0001
+i              0.1597     0.0052     0.0000
+y              0.6096     0.0170     0.0003
+ 
+
+
+MATRIX OF CORRELATIONS
+
+Variables    z        c        i        y        
+z            1.0000  0.9964  0.9766  0.9922
+c            0.9964  1.0000  0.9913  0.9992
+i            0.9766  0.9913  1.0000  0.9958
+y            0.9922  0.9992  0.9958  1.0000
+ 
+
+
+COEFFICIENTS OF AUTOCORRELATION
+
+Order    1       2       3       4       5       
+z        0.9400  0.8836  0.8306  0.7807  0.7339
+c        0.9613  0.9152  0.8666  0.8180  0.7708
+i        0.9818  0.9456  0.9012  0.8538  0.8062
+y        0.9693  0.9270  0.8800  0.8319  0.7845

@@ -1,0 +1,250 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML is auto-generated from an M-file.
+To make changes, update the M-file and republish this document.
+      --><title>hw5p1</title><meta name="generator" content="MATLAB 7.9"><meta name="date" content="2012-06-15"><meta name="m-file" content="hw5p1"><style type="text/css">
+
+body {
+  background-color: white;
+  margin:10px;
+}
+
+h1 {
+  color: #990000; 
+  font-size: x-large;
+}
+
+h2 {
+  color: #990000;
+  font-size: medium;
+}
+
+/* Make the text shrink to fit narrow windows, but not stretch too far in 
+wide windows. */ 
+p,h1,h2,div.content div {
+  max-width: 600px;
+  /* Hack for IE6 */
+  width: auto !important; width: 600px;
+}
+
+pre.codeinput {
+  background: #EEEEEE;
+  padding: 10px;
+}
+@media print {
+  pre.codeinput {word-wrap:break-word; width:100%;}
+} 
+
+span.keyword {color: #0000FF}
+span.comment {color: #228B22}
+span.string {color: #A020F0}
+span.untermstring {color: #B20000}
+span.syscmd {color: #B28C00}
+
+pre.codeoutput {
+  color: #666666;
+  padding: 10px;
+}
+
+pre.error {
+  color: red;
+}
+
+p.footer {
+  text-align: right;
+  font-size: xx-small;
+  font-weight: lighter;
+  font-style: italic;
+  color: gray;
+}
+
+  </style></head><body><div class="content"><pre class="codeinput">clear <span class="string">all</span>;
+clc;
+
+rbcdata= importdata(<span class="string">'QuarterlyRBC_Quarterly.txt'</span>);
+<span class="comment">%column 1 is GDP, column 2 is investment, column 3 is consumption</span>
+
+rbcmat=[rbcdata.data(:,1), rbcdata.data(:,2), rbcdata.data(:,3)];
+rbcmat=log(rbcmat);
+
+[yt,yd]=hptrend(rbcmat,1600);
+<span class="comment">%yt is the growth trend</span>
+<span class="comment">%yd is the detrended data--cyclical component</span>
+
+figure
+hold <span class="string">on</span>
+plot(rbcmat(:,1),<span class="string">'b'</span>)
+plot(yt(:,1),<span class="string">'g-.'</span>)
+title(<span class="string">'ln(Real GDP) and HPtrend'</span>)
+xlabel(<span class="string">'Time'</span>)
+ylabel(<span class="string">'ln(Real GDP)'</span>)
+hold <span class="string">off</span>
+
+gdp_dtr =   yd(:,1);
+i_dtr = yd(:,2);
+c_dtr =  yd(:,3);
+
+sdY = sqrt(var(gdp_dtr));
+sdI = sqrt(var(i_dtr));
+sdC = sqrt(var(c_dtr));
+
+figure
+hold <span class="string">on</span>
+plot(gdp_dtr,<span class="string">'b'</span>)
+plot(i_dtr,<span class="string">'m'</span>)
+plot(c_dtr,<span class="string">'g'</span>)
+title(<span class="string">'Detrended GDP, I, C'</span>)
+xlabel(<span class="string">'Time'</span>)
+ylabel(<span class="string">'ln(Deviations from trend)'</span>)
+hold <span class="string">off</span>
+
+corrs=corr(yd);
+corrs=corrs(1,:);
+
+fprintf(<span class="string">'Correlation between GDP-GDP and GDP-Investment and GDP-Consumption, respectively are:'</span>)
+corrs
+fprintf(<span class="string">'---------------------------------------------------\n'</span>)
+
+gdp_dtrl = lagmatrix(gdp_dtr,1);
+gdp_dtrl = gdp_dtrl(2:length(gdp_dtr));
+gdp_dtr = gdp_dtr(2:length(gdp_dtr));
+
+c_dtrl = lagmatrix(c_dtr,1);
+c_dtrl = c_dtrl(2:length(c_dtr));
+c_dtr = c_dtr(2:length(c_dtr));
+
+i_dtrl = lagmatrix(i_dtr,1);
+i_dtrl = i_dtrl(2:length(i_dtr));
+i_dtr = i_dtr(2:length(i_dtr));
+
+fprintf(<span class="string">'Autocorrelation for GDP is:'</span>)
+acorrg=corrcoef(gdp_dtr,gdp_dtrl);
+acorrg=acorrg(2,1)
+fprintf(<span class="string">'Autocorrelation for Investment is:'</span>)
+acorri=corrcoef(i_dtr,i_dtrl);
+acorri=acorri(2,1)
+fprintf(<span class="string">'Autocorrelation for Consumption is:'</span>)
+acorrc=corrcoef(c_dtr,c_dtrl);
+acorrc=acorrc(2,1)
+fprintf(<span class="string">'---------------------------------------------------\n'</span>)
+fprintf(<span class="string">'Ratio of the standard deviations for GDP/Investment is:'</span>)
+sdI/sdY
+fprintf(<span class="string">'Ratio of the standard deviations for GDP/Consumption is:'</span>)
+sdC/sdY
+</pre><pre class="codeoutput">Correlation between GDP-GDP and GDP-Investment and GDP-Consumption, respectively are:
+corrs =
+
+    1.0000    0.8473    0.7837
+
+---------------------------------------------------
+Autocorrelation for GDP is:
+acorrg =
+
+    0.8476
+
+Autocorrelation for Investment is:
+acorri =
+
+    0.7949
+
+Autocorrelation for Consumption is:
+acorrc =
+
+    0.8160
+
+---------------------------------------------------
+Ratio of the standard deviations for GDP/Investment is:
+ans =
+
+    4.8996
+
+Ratio of the standard deviations for GDP/Consumption is:
+ans =
+
+    0.7664
+
+</pre><img vspace="5" hspace="5" src="hw5p1_01.png" alt=""> <img vspace="5" hspace="5" src="hw5p1_02.png" alt=""> <p class="footer"><br>
+      Published with MATLAB&reg; 7.9<br></p></div><!--
+##### SOURCE BEGIN #####
+clear all;
+clc;
+
+rbcdata= importdata('QuarterlyRBC_Quarterly.txt');
+%column 1 is GDP, column 2 is investment, column 3 is consumption
+
+rbcmat=[rbcdata.data(:,1), rbcdata.data(:,2), rbcdata.data(:,3)];
+rbcmat=log(rbcmat);
+
+[yt,yd]=hptrend(rbcmat,1600);
+%yt is the growth trend
+%yd is the detrended dataREPLACE_WITH_DASH_DASHcyclical component
+
+figure
+hold on
+plot(rbcmat(:,1),'b')
+plot(yt(:,1),'g-.')
+title('ln(Real GDP) and HPtrend')
+xlabel('Time')
+ylabel('ln(Real GDP)')
+hold off
+
+gdp_dtr =   yd(:,1);
+i_dtr = yd(:,2);
+c_dtr =  yd(:,3);
+
+sdY = sqrt(var(gdp_dtr));
+sdI = sqrt(var(i_dtr));
+sdC = sqrt(var(c_dtr));
+
+figure
+hold on
+plot(gdp_dtr,'b')
+plot(i_dtr,'m')
+plot(c_dtr,'g')
+title('Detrended GDP, I, C')
+xlabel('Time')
+ylabel('ln(Deviations from trend)')
+hold off
+
+corrs=corr(yd);
+corrs=corrs(1,:);
+
+fprintf('Correlation between GDP-GDP and GDP-Investment and GDP-Consumption, respectively are:')
+corrs
+fprintf('REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH-\n')
+
+gdp_dtrl = lagmatrix(gdp_dtr,1);
+gdp_dtrl = gdp_dtrl(2:length(gdp_dtr));
+gdp_dtr = gdp_dtr(2:length(gdp_dtr));
+
+c_dtrl = lagmatrix(c_dtr,1);
+c_dtrl = c_dtrl(2:length(c_dtr));
+c_dtr = c_dtr(2:length(c_dtr));
+
+i_dtrl = lagmatrix(i_dtr,1);
+i_dtrl = i_dtrl(2:length(i_dtr));
+i_dtr = i_dtr(2:length(i_dtr));
+
+fprintf('Autocorrelation for GDP is:')
+acorrg=corrcoef(gdp_dtr,gdp_dtrl);
+acorrg=acorrg(2,1)
+fprintf('Autocorrelation for Investment is:')
+acorri=corrcoef(i_dtr,i_dtrl);
+acorri=acorri(2,1)
+fprintf('Autocorrelation for Consumption is:')
+acorrc=corrcoef(c_dtr,c_dtrl);
+acorrc=acorrc(2,1)
+fprintf('REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH-\n')
+fprintf('Ratio of the standard deviations for GDP/Investment is:')
+sdI/sdY
+fprintf('Ratio of the standard deviations for GDP/Consumption is:')
+sdC/sdY
+
+
+
+##### SOURCE END #####
+--></body></html>
